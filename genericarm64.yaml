@@ -1,0 +1,63 @@
+header:
+  version: 8
+  includes:
+    - repo: meta-arm
+      file: ci/genericarm64.yml 
+    - repo: meta-arm
+      file: ci/glibc.yml
+    - repo: meta-arm
+      file: ci/meta-openembedded.yml
+
+target:
+    - core-image-weston
+
+repos:
+  meta-arm:
+    url: https://git.yoctoproject.org/meta-arm.git
+    branch: master
+  meta-openembedded:
+    layers:
+      meta-multimedia:
+
+local_conf_header:
+  builder: |
+    BB_NICE_LEVEL = "10"
+  debug: |
+    EXTRA_IMAGE_FEATURES:append = " \
+      allow-empty-password \
+      empty-root-password \
+      allow-root-login \
+      post-install-logging \
+      serial-autologin-root \
+      ssh-server-openssh \
+    "
+    CORE_IMAGE_EXTRA_INSTALL:append = " ssh-pregen-hostkeys"
+  systemd: |
+    INIT_MANAGER = "systemd"
+    DISTRO_FEATURES:append = " pam"
+    VIRTUAL-RUNTIME_syslog = ""
+    VIRTUAL-RUNTIME_base-utils-syslog = ""
+  setup package_management: |
+    IMAGE_FEATURES += "package-management"
+    PACKAGE_CLASSES  = "package_rpm"
+  image_format: |
+    IMAGE_FSTYPES = "tar.bz2"
+  image_extras: |
+    PACKAGECONFIG:append:pn-libcamera = " gst"
+    PACKAGECONFIG:append:pn-gstreamer1.0-plugins-bad = " kms"
+
+    IMAGE_INSTALL:append = "\
+      gstreamer1.0-plugins-good \
+      gstreamer1.0-plugins-bad \
+      gstreamer1.0-plugins-base \
+      opencv \
+      opencv-dev \
+      opencv-staticdev \
+      libdrm \
+      libdrm-drivers \
+      libdrm-tests \
+      v4l-utils \
+      yavta \
+      libcamera \
+      libcamera-gst \
+    "
