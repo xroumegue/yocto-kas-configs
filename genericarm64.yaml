@@ -18,6 +18,12 @@ repos:
   meta-openembedded:
     layers:
       meta-multimedia:
+  meta-staging:
+    url: https://github.com/xroumegue/meta-staging.git
+    path: sources/meta-staging
+    branch: main
+    layers:
+      .:
 
 local_conf_header:
   builder: |
@@ -60,4 +66,7 @@ local_conf_header:
       yavta \
       libcamera \
       libcamera-gst \
+      nfs-utils \
+      mount-dev \
+      autofs \
     "
