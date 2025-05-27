@@ -5,8 +5,6 @@ header:
       file: ci/genericarm64.yml 
     - repo: meta-arm
       file: ci/glibc.yml
-    - repo: meta-arm
-      file: ci/meta-openembedded.yml
 
 target:
     - core-image-weston
@@ -16,7 +14,13 @@ repos:
     url: https://git.yoctoproject.org/meta-arm.git
     branch: master
   meta-openembedded:
+    url: https://github.com/openembedded/meta-openembedded.git
     layers:
+      meta-filesystems:
+      meta-networking:
+      meta-oe:
+      meta-perl:
+      meta-python:
       meta-multimedia:
   meta-staging:
     url: https://github.com/xroumegue/meta-staging.git
