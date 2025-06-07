@@ -5,11 +5,16 @@ header:
       file: ci/genericarm64.yml 
     - repo: meta-arm
       file: ci/glibc.yml
+    - repo: meta-patches
+      file: configs/fixup.yml
 
 target:
     - core-image-weston
 
 repos:
+  meta-patches:
+    url: https://github.com/xroumegue/meta-patches.git
+    branch: main
   meta-arm:
     url: https://git.yoctoproject.org/meta-arm.git
     branch: master
