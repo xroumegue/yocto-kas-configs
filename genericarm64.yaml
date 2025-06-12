@@ -2,7 +2,7 @@ header:
   version: 8
   includes:
     - repo: meta-arm
-      file: ci/genericarm64.yml 
+      file: ci/genericarm64.yml
     - repo: meta-arm
       file: ci/glibc.yml
     - repo: meta-patches
@@ -47,6 +47,12 @@ local_conf_header:
       ssh-server-openssh \
     "
     CORE_IMAGE_EXTRA_INSTALL:append = " ssh-pregen-hostkeys"
+  sdk: |
+    TOOLCHAIN_HOST_TASK:append = " \
+      nativesdk-python3-jinja2 \
+      nativesdk-python3-pyyaml \
+      nativesdk-python3-ply \
+    "
   systemd: |
     INIT_MANAGER = "systemd"
     DISTRO_FEATURES:append = " pam"
