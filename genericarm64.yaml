@@ -64,7 +64,7 @@ local_conf_header:
   image_format: |
     IMAGE_FSTYPES = "tar.bz2"
   image_extras: |
-    PACKAGECONFIG:append:pn-libcamera = " gst pycamera"
+    PACKAGECONFIG:append:pn-libcamera = " gst python"
     PACKAGECONFIG:append:pn-gstreamer1.0-plugins-bad = " kms"
 
     IMAGE_INSTALL:append = "\
